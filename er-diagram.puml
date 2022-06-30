@@ -1,6 +1,6 @@
 @startuml er-diagram
 
-class "Клиент" as Clinet {
+class "Client" as Client {
   - id
   - phone
   - status
@@ -8,34 +8,39 @@ class "Клиент" as Clinet {
   - sex
 }
 
-class "Дополнительные\nхарактерисики" as ClinetCharacteristics {
+class "LoyalityEvents" as LoyalityEvents {
   - id
+  - client_id
   - name
   - type
+  - start_date
+  - total
 }
 
-class "Значения\nдополнительных\nхарактерисик" as AdditionalInformation {
+class "AdditionalInformation" as AdditionalInformation {
   - client_id
-  - characteristic_id
+  - characteristic
   - value
 }
 
-class "Бонусный счет" as BonusAccount {
+class "BonusAccounts" as BonusAccounts {
   - id
   - client_id
   - status
 }
 
-class "Движения\nбонусных баллов" as AccountMovement {
+class "BonusTransactions" as BonusTransactions {
   - account_id
   - client_id
-  - movement_type
-  - summ
+  - datetime
+  - type
+  - basis
+  - total
 }
 
-BonusAccount }|--|| Clinet
-AccountMovement }o--|| BonusAccount
-AdditionalInformation }o--o{ Clinet
-AdditionalInformation }o--o{ ClinetCharacteristics
+BonusAccounts }|--|| Client
+BonusTransactions }o--|| BonusAccounts
+AdditionalInformation }o--o{ Client
+LoyalityEvents }o--|| Client
 
 @enduml

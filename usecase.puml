@@ -17,8 +17,8 @@ client --> self_init : самостоятельно
 client --> self_register : самостоятельно
 client --> bonus_report : самостоятельно
 client --> store_employee : обращается
-self_init ...> client_init
-self_register ...> client_register
+self_init ...> client_init : include
+self_register ...> client_register : include
 store_employee --> client_init
 store_employee --> client_register
 store_employee --> bonus_report
@@ -27,9 +27,9 @@ trade_system --> accrue_bonuses
 trade_system --> use_bonuses
 office_employee --> set_events
 office_employee --> client_update
-set_events ...> accrue_bonuses
-set_events ...> use_bonuses
-client_update ...> client_categorization
-accrue_bonuses ...> client_categorization
-use_bonuses ...> client_categorization
+set_events ...> accrue_bonuses : include
+set_events ...> use_bonuses : include
+client_update ...> client_categorization : include
+accrue_bonuses ...> client_categorization : include
+use_bonuses ...> client_categorization : include
 @enduml
