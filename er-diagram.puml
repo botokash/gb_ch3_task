@@ -1,0 +1,41 @@
+@startuml er-diagram
+
+class "Клиент" as Clinet {
+  - id
+  - phone
+  - status
+  - name
+  - sex
+}
+
+class "Дополнительные\nхарактерисики" as ClinetCharacteristics {
+  - id
+  - name
+  - type
+}
+
+class "Значения\nдополнительных\nхарактерисик" as AdditionalInformation {
+  - client_id
+  - characteristic_id
+  - value
+}
+
+class "Бонусный счет" as BonusAccount {
+  - id
+  - client_id
+  - status
+}
+
+class "Движения\nбонусных баллов" as AccountMovement {
+  - account_id
+  - client_id
+  - movement_type
+  - summ
+}
+
+BonusAccount }|--|| Clinet
+AccountMovement }o--|| BonusAccount
+AdditionalInformation }o--o{ Clinet
+AdditionalInformation }o--o{ ClinetCharacteristics
+
+@enduml

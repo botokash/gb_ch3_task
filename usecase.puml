@@ -1,0 +1,35 @@
+@startuml usecase
+actor "Клиент" as client
+actor "Сотрудник\nмагазина" as store_employee
+actor "Сотрудник\nофиса" as office_employee
+actor "Торговая\nсистема" as trade_system
+usecase "Стать участником\nбонусной программы" as self_init
+usecase "Предоставить\nперсональные данные" as self_register
+usecase "Создание нового\nклиента" as client_init
+usecase "Регистрация\nклиента" as client_register
+usecase "Получить отчет\nпо бонусным баллам" as bonus_report
+usecase "Начислить\nбонусные баллы" as accrue_bonuses
+usecase "Списать\nбонусные баллы" as use_bonuses
+usecase "Настроить события\nдля удержания клиента" as set_events
+usecase "Управление свойствами\nклиентской базы" as client_update
+usecase "Обновление\nинформации о клиенте" as client_categorization
+client --> self_init : самостоятельно
+client --> self_register : самостоятельно
+client --> bonus_report : самостоятельно
+client --> store_employee : обращается
+self_init ...> client_init
+self_register ...> client_register
+store_employee --> client_init
+store_employee --> client_register
+store_employee --> bonus_report
+store_employee --> trade_system : использует
+trade_system --> accrue_bonuses
+trade_system --> use_bonuses
+office_employee --> set_events
+office_employee --> client_update
+set_events ...> accrue_bonuses
+set_events ...> use_bonuses
+client_update ...> client_categorization
+accrue_bonuses ...> client_categorization
+use_bonuses ...> client_categorization
+@enduml
